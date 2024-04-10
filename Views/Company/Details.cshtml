@@ -1,0 +1,36 @@
+﻿@model Learing_Core.Models.Company
+
+@{
+    ViewData["Title"] = "Detalis";
+}
+
+<h1>Detalis</h1>
+
+<div>
+    <dl class="row" style="color:white;">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        @if (Model.CompanyLogo != null)
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.CompanyLogo)
+            </dt>
+            <dd class="col-sm-10">
+                <img src="data:image/*;Base64,@Convert.ToBase64String(Model.CompanyLogo)" style="width:70px" class="img-thumbnail" />
+            </dd>
+        }
+
+    </dl>
+
+    <a asp-action="Index">Back to List</a>
+</div>

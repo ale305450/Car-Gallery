@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Learing_Core</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/page2.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Learing_Core.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid .top">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Carly</a>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Cars for Sell</a>
+                        </li>
+
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Index">Cars</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Company" asp-action="Index">Company</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Gallery" asp-action="Index">Gallery</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Roles" asp-action="Index">Roles</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Users" asp-action="Index">Users</a>
+                            </li>
+                        }
+                    </ul>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+
+        <div class="modal" tabindex="-1" role="dialog" id="form-modal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer start-->
+    <footer>
+        <section class="contact">
+            <div class="content">
+                <h2>Contact Us</h2>
+                <p>Let us know if there something on your mind</p>
+            </div>
+            <div class="contain">
+                <div class="contactInfo">
+                    <div class="box">
+                        <div class="icon"><img src="~/Images//location.png" alt="" height="30px" width="30px"></div>
+                        <div class="text">
+                            <h3>Address</h3>
+                            <p>Yemen-Mukklla<br>Fuah,MainRoad</p>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="icon"><img src="~/Images//phone.png" alt="" height="30px" width="30px"></div>
+                        <div class="text">
+                            <h3>Phone</h3>
+                            <p>+967 773-792-408</p>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="icon"><img src="~/Images//email-532-433830.png" alt="" height="30px" width="30px"></div>
+                        <div class="text">
+                            <h3>Email</h3>
+                            <p>ale305450@gmail.com</p>
+                        </div>
+                    </div>
+                    <h2 class="txt">Connect with us</h2>
+                    <ul class="sci">
+                        <li><a href="#"><img src="~/Images/facebook.png" alt="" height="30px" width="30px"></a></li>
+                        <li><a href="#"><img src="~/Images//whatsapp.png" alt="" height="30px" width="30px"></a></li>
+                        <li><a href="#"><img src="~/Images//tiwterFooter.png" alt="" height="30px" width="30px"></a></li>
+                        <li><a href="#"><img src="" alt=""></a></li>
+                    </ul>
+                </div>
+
+                <div class="contactForm">
+                    <form>
+                        <h2>Send Message</h2>
+                        <div class="inputBox">
+                            <input type="text" name="" required="required">
+                            <span>Full Name</span>
+                        </div>
+                        <div class="inputBox">
+                            <input type="text" name="" required="required">
+                            <span>Email</span>
+                        </div>
+                        <div class="inputBox">
+                            <textarea required="required"></textarea>
+                            <span>Type your Message...</span>
+                        </div>
+                        <div class="inputBox">
+                            <input type="submit" value="Send">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </footer>
+    <!-- Footer End-->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/bootbox.js/bootbox.min.js"></script>
+    <script src="~/lib/DataTables/datatables.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

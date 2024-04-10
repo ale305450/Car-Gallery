@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Learing_Core.Models.Car>
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="container11">
+    <div class="Des11">
+        <p style="font-size: 40px;">Carly</p>
+        <p>
+            Is car gallery that help to find the best car you want with amazing price <br> and make it easy to sell you own cars
+        </p>
+    </div>
+</div>
+<!-- Contetnt End-->
+<!-- Cars for sell-->
+<div class="car_sell11">
+    <div class="SellTitle11">
+        Cars For sell
+    </div>
+    @foreach (var item in Model)
+    {
+        @if (@item.RentalCarId == null)
+        {
+            <div class="cardS11">
+                <div class="card11">
+                    <div class="imgBx11">
+                        <img src="data:image/*;Base64,@Convert.ToBase64String(@item.CarImage1)">
+                    </div>
+                    <div class="details11">
+                        <h3><br>@item.Name<span>@item.Company.Name</span></h3>
+                        <h4>Car Details</h4>
+                        <p>@item.Description</p>
+                        <div class="group11">
+                            <h2><sup>$</sup>@item.Price</h2>
+                            <a href="#">More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+<!-- Cars for sell-->
+<!-- Cars for Rent-->
+<div class="car_rent11">
+    <div class="rentTitle11">
+        Cars For Rent
+    </div>
+    @foreach (var item in Model)
+    {
+        if (@item.RentalCarId != null)
+        {
+            <div class="cardR11">
+                <div class="card11">
+                    <div class="imgBx11">
+                        <img  src="data:image/*;Base64,@Convert.ToBase64String(@item.CarImage1)">
+                    </div>
+                    <div class="details11">
+                        <h3>@item.Name<br><span>@item.Company.Name</span></h3>
+                        <h4>Car Details</h4>
+                        <p>@item.Description</p>
+                        <h4>Rent Peroid</h4>
+                        <ul class="size11">
+                            <li>@item.RentalCar.Length</li>
+                        </ul>
+                        <div class="group11">
+                            <h2><sup>$</sup>@item.Price</h2>
+                            <a href="#">More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+
+</div>
+<!-- Cars for Rent-->

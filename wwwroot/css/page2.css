@@ -1,0 +1,235 @@
+
+.container11 {
+    grid-area: Pic;
+    background-image: url(../carsImage/Untitled-1.jpg);
+    background-size: cover;
+    height: 605px;
+    display: grid;
+    grid-template-columns: repeat(1,1fr);
+    grid-template-rows: minmax(60px,350px);
+    grid-template-areas: "Pic PIC"
+        "Des Des";
+}
+
+.Des11 {
+    grid-area: Des;
+    visibility: visible;
+    color: var(--lightcolor);
+    padding: 40px;
+    line-height: 35px;
+    box-shadow: 0 10px 10px 0 rgba(0,0,0,0.2), 0 5px 5px 0 rgba(0,0,0,0.1);
+    background-color: rgba(9,9,9,0.9);
+}
+
+    .Des11:active {
+        visibility: visible;
+    }
+
+.car_sell11 {
+    grid-area: sell;
+    display: grid;
+    grid-template-columns: repeat(10,1fr);
+    grid-template-rows: minmax(50px,auto);
+    grid-template-areas:
+        "head head head head head head head head head head"
+        "car car car car car car car car car car";
+}
+
+    .car_sell11 .SellTitle11 {
+        grid-area: head;
+        padding: 15px;
+        margin: 15px;
+        font-size: 45px;
+        border-left: 10px solid var(--primarycolor);
+        color: var(--secondarycolor);
+    }
+
+.cardS11 {
+    grid-area: car;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.card11 {
+    position: relative;
+    width: 300px;
+    height: 380px;
+    background: var(--bgcolor-1);
+    box-shadow: 0 15px 45px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: 0.5s ease-in-out;
+    margin: 4px 25px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+    .card11:hover {
+        width: 600px;
+    }
+
+    .card11 .imgBx11 {
+        position: relative;
+        min-width: 300px;
+        height: 100%;
+        background: var(--lightcolor);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10;
+    }
+
+        .card11 .imgBx11 img {
+            max-width: 300px;
+            height: 100%;
+            transition: 0.5s ease-in-out;
+        }
+
+    .card11 .details11 {
+        position: absolute;
+        left: 0;
+        width: 300px;
+        height: 100%;
+        background: var(--primarycolor);
+        display: flex;
+        justify-content: center;
+        padding: 20px;
+        flex-direction: column;
+        transition: 0.5s ease-in-out;
+    }
+
+    .card11:hover .details11 {
+        left: 300px;
+    }
+
+    .card11 .details11::before {
+        content: '';
+        position: absolute;
+        left: 0px;
+        width: 0;
+        height: 0;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        border-left: 10px solid var(--lightcolor);
+        z-index: 1;
+    }
+
+    .card11 .details11 h3 {
+        color: var(--lightcolor);
+        text-transform: uppercase;
+        font-weight: 600;
+        font-size: 1.5em;
+        line-height: 1em;
+    }
+
+        .card11 .details11 h3 span {
+            font-size: 0.65em;
+            font-weight: 300;
+            opacity: 0.85;
+            text-transform: none;
+        }
+
+    .card11 .details11 h4 {
+        color: var(--lightcolor);
+        text-transform: uppercase;
+        font-weight: 600;
+        font-size: 0.9em;
+        line-height: 1em;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+
+p {
+    color: var(--lightcolor);
+    font-size: 0.8em;
+    opacity: 0.85;
+}
+
+.size11 {
+    display: flex;
+    gap: 10px;
+}
+
+    .size11 li {
+        list-style: none;
+        color: var(--lightcolor);
+        font-size: 0.9em;
+        width: 40px;
+        height: 40px;
+        padding: 1px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 2px solid var(--lightcolor);
+        cursor: pointer;
+        font-weight: 500;
+        opacity: 0.5;
+    }
+
+        .size11 li:hover {
+            background: var(--lightcolor);
+            color: #4ba9e9;
+            opacity: 1;
+        }
+
+.group11 {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    align-items: center;
+}
+
+.card11 .details11 h2 {
+    color: var(--lightcolor);
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 2em;
+}
+
+    .card11 .details11 h2 sup {
+        font-weight: 300;
+    }
+
+    .card11 .details11 h2 small {
+        font-size: 0.75em;
+    }
+
+.card11 .details11 a {
+    display: inline-flex;
+    padding: 10px 25px;
+    background: var(--lightcolor);
+    font-weight: 500;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--primarycolor);
+}
+
+.car_rent11 {
+    grid-area: rent;
+    display: grid;
+    grid-template-columns: repeat(10,1fr);
+    grid-template-rows: minmax(50px,auto);
+    grid-template-areas:
+        "headr headr headr headr . . . . . ."
+        "rcar rcar rcar rcar rcar rcar rcar rcar rcar rcar";
+}
+
+    .car_rent11 .rentTitle11 {
+        grid-area: headr;
+        padding: 15px;
+        margin: 15px;
+        font-size: 45px;
+        border-left: 10px solid var(--primarycolor);
+        color: var(--secondarycolor);
+    }
+
+.cardR11 {
+    grid-area: rcar;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}

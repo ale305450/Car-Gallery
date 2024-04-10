@@ -1,0 +1,112 @@
+﻿@model Learing_Core.Models.Car
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div>
+    <h4>Car @Model.Name</h4>
+    <hr />
+    <div class="slider">
+        <div class="slides">
+            @if (Model.CarImage1 != null || Model.CarImage2 != null ||Model.CarImage3 != null)
+            {
+                <img id="slider1" src="data:image/*;Base64,@Convert.ToBase64String(Model.CarImage1)">
+                <img id="slider2" src="data:image/*;Base64,@Convert.ToBase64String(Model.CarImage2)">
+                <img id="slider3" src="data:image/*;Base64,@Convert.ToBase64String(Model.CarImage3)">
+            }
+            else
+            {
+                <img id="slider1" src="" height="200px" width="300px">
+                <img id="slider2" src="" height="200px" width="300px">
+                <img id="slider3" src="" height="200px" width="300px">
+            }
+        </div>
+        <button class="prev">&#10094;</button>
+        <button class="next">&#10095;</button>
+    </div>
+    <dl class="row" style="color:white;">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Car_Model)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Car_Model)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ContactNumbr)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ContactNumbr)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Gallery)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Gallery.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Company)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Company.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RentalCar)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RentalCar.Length)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Index" class="btn-primary btn">Back to List</a>
+</div>
+
+@section Scripts {
+<script>
+    const slides = document.querySelectorAll(".slides img");
+    const prev = document.querySelector(".prev");
+    const next = document.querySelector(".next");
+    let currentSlide = 0;
+
+    // Hide all slides except the first one
+    for (let i = 1; i < slides.length; i++) {
+      slides[i].style.display = "none";
+    }
+
+    // Add event listeners to the prev and next buttons
+    prev.addEventListener("click", () => {
+      if (currentSlide > 0) {
+        slides[currentSlide].style.display = "none";
+        currentSlide--;
+        slides[currentSlide].style.display = "block";
+      }
+    });
+
+    next.addEventListener("click", () => {
+      if (currentSlide < slides.length - 1) {
+        slides[currentSlide].style.display = "none";
+        currentSlide++;
+        slides[currentSlide].style.display = "block";
+      }
+    });
+</script>
+    }

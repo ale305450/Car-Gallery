@@ -1,0 +1,146 @@
+﻿@model IEnumerable<Learing_Core.Models.Car>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div id="alert" class="alert alert-warning alert-dismissible fade show mt-4 d-none" role="alert">
+    Car Deleted
+</div>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<form asp-action="search">
+    <p>
+        @Html.TextBox("searchTerm")
+        <input type="submit" value="Search" />
+    </p>
+</form>
+<table class="table table-bordered table-hover" style="color:white" id="myTable">
+    <thead>
+        <tr>
+            <th>
+                Car Image
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Car_Model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContactNumbr)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Company)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RentalCar)
+            </th>
+            <th>
+                Operations
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @if (item.CarImage1 != null)
+                    {
+                        <img src="data:image/*;Base64,@Convert.ToBase64String(item.CarImage1)" id="profilePicture" style="height: 100px;" class="img-thumbnail" alt="profilepic">
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Car_Model)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContactNumbr)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Company.Name)
+                </td>
+                @if (item.RentalCarId == null)
+                {
+                    <td>
+                        The Car is for Sell
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RentalCar.Length)
+                    </td>
+                }
+                @if (User.IsInRole("Admin"))
+                {
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a href="javascript:;" class="btn btn-danger js-delete" data-id="@item.Id">Delete</a>
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts{
+<script>
+         $(document).ready(function(){
+            $('.js-delete').on('click',function(){
+            var btn = $(this);
+            bootbox.confirm({
+                            title: 'Delete Car',
+                            message: 'Are you sure to delete the Car? This cannot be undone.',
+                            buttons: {
+                                cancel: {
+                                label: '<i class="fa fa-times"></i> Cancel'
+                                },
+                            confirm: {
+                                label: '<i class="fa fa-check btn-danger"></i> Confirm'
+                                }
+                            },
+                            callback: function (result) {
+                                if(result)
+                                {
+                                    $.ajax({
+                                        url:'/api/CarApi/' +btn.data('id'),
+                                        method:'DELETE',
+                                        success:function(){
+                                            btn.parents('tr').fadeOut();
+                                            $('#alert').removeClass('d-none');
+
+                                            setTimeout(function(){$('#alert').addClass('d-none');},3000);
+
+                                        },
+                                        error:function(){
+                                            alert('Something wrong');
+                                        }
+                                    })
+                                }
+
+                            }
+                    });
+        })
+    })
+
+</script>
+}

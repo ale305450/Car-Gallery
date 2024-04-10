@@ -1,0 +1,149 @@
+﻿@model Learing_Core.ViewModels.CarViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<div class="row">
+    <div class="slider">
+        <div class="slides">
+            @if (Model.CarImage1 != null || Model.CarImage2 != null || Model.CarImage3 != null)
+            {
+                <img id="slider1" src="data:image/*;Base64,@Convert.ToBase64String(Model.CarImage1)">
+                <img id="slider2" src="data:image/*;Base64,@Convert.ToBase64String(Model.CarImage2)">
+                <img id="slider3" src="data:image/*;Base64,@Convert.ToBase64String(Model.CarImage3)">
+            }
+            else
+            {
+                <img id="slider1" src="" height="200px" width="300px">
+                <img id="slider2" src="" height="200px" width="300px">
+                <img id="slider3" src="" height="200px" width="300px">
+            }
+        </div>
+        <button class="prev">&#10094;</button>
+        <button class="next">&#10095;</button>
+    </div>
+    <div class="col-md-4" style="color:white;">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Car_Model" class="control-label"></label>
+                <input asp-for="Car_Model" class="form-control" />
+                <span asp-validation-for="Car_Model" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ContactNumbr" class="control-label"></label>
+                <input asp-for="ContactNumbr" class="form-control" />
+                <span asp-validation-for="ContactNumbr" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CompanyId" class="control-label"></label>
+                <select asp-for="CompanyId" asp-items="@(new SelectList(Model.Company,"Id","Name"))" class="form-control" name="CompanyId"></select>
+                <span asp-validation-for="CompanyId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RentalCarId" class="control-label"></label>
+                <input type="checkbox" id="rentalCarCheckbox" onchange="toggleRentalCarSelect()" />
+            </div>
+            <div class="form-group" id="rentalCarSelectGroup" style="display: none;">
+                <label asp-for="RentalCarId" class="control-label"></label>
+                <select asp-for="RentalCarId" asp-items="@(new SelectList(Model.RentalCar,"Id","Length"))" class="form-control">
+                    @if (Model.RentalCarId == null)
+                    {
+                        <option value="">Select Rent Length</option>
+                    }
+                </select>
+                <span asp-validation-for="RentalCarId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CarImage1" class="control-label"></label>
+                <input type="file" name="CarImage1" asp-for="CarImage1" class="form-control" onchange="document.getElementById('slider1').src= window.URL.createObjectURL(this.files[0])" />
+                <span asp-validation-for="CarImage1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CarImage2" class="control-label"></label>
+                <input type="file" name="CarImage2" asp-for="CarImage2" class="form-control" onchange="document.getElementById('slider2').src= window.URL.createObjectURL(this.files[0])" />
+                <span asp-validation-for="CarImage2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CarImage3" class="control-label"></label>
+                <input type="file" name="CarImage3" asp-for="CarImage3" class="form-control" onchange="document.getElementById('slider3').src= window.URL.createObjectURL(this.files[0])" />
+                <span asp-validation-for="CarImage3" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Edit" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+
+    @section Scripts {
+    @{
+
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
+    }
+    <script>
+        const slides = document.querySelectorAll(".slides img");
+        const prev = document.querySelector(".prev");
+        const next = document.querySelector(".next");
+        let currentSlide = 0;
+
+        // Hide all slides except the first one
+        for (let i = 1; i < slides.length; i++) {
+          slides[i].style.display = "none";
+        }
+
+        // Add event listeners to the prev and next buttons
+        prev.addEventListener("click", () => {
+          if (currentSlide > 0) {
+            slides[currentSlide].style.display = "none";
+            currentSlide--;
+            slides[currentSlide].style.display = "block";
+          }
+        });
+
+        next.addEventListener("click", () => {
+          if (currentSlide < slides.length - 1) {
+            slides[currentSlide].style.display = "none";
+            currentSlide++;
+            slides[currentSlide].style.display = "block";
+          }
+        });
+    </script>
+    <script>
+        function toggleRentalCarSelect() {
+             var rentalCarCheckbox = document.getElementById('rentalCarCheckbox');
+             var rentalCarSelectGroup = document.getElementById('rentalCarSelectGroup');
+             var rentalCarSelect = document.getElementById('RentalCarId');
+
+             if (rentalCarCheckbox.checked) {
+                 rentalCarSelectGroup.style.display = 'block';
+                 rentalCarSelect.disabled = false;
+             } else {
+                 rentalCarSelectGroup.style.display = 'none';
+                 rentalCarSelect.disabled = true;
+                 rentalCarSelect.value = ''; // Clear the selected value
+             }
+         }
+    </script>
+    }

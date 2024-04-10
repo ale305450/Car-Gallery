@@ -1,0 +1,54 @@
+﻿@model Learing_Core.ViewModels.CompanyViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = null;
+}
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="row">
+                <div class="col-md-6">    
+                    <img id="profilePicture" class="profile-pic align-content-center" alt="profilepic" src="data:image/*;Base64,@Convert.ToBase64String(Model.CompanyLogo)">
+                    <div class="form-group">
+                        <div class="custom-file mt-2">
+                            <input type="file"
+                                   accept="image/*"
+                                   asp-for="CompanyLogo"
+                                   class="custom-file-input"
+                                   onchange="document.getElementById('profilePicture').src= window.URL.createObjectURL(this.files[0])" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label"></label>
+                        <input asp-for="Description" class="form-control" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary btn-block" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}

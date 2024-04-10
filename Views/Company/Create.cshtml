@@ -1,0 +1,43 @@
+﻿@model Learing_Core.ViewModels.CompanyViewModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = null;
+}
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <img id="profilePicture" class="profile-pic" alt="profilepic" src="~/Images/Company.png">
+            <div class="form-group">
+                <div class="custom-file mt-2">
+                    <input type="file"
+                           accept="image/*"
+                           asp-for="CompanyLogo"
+                           class="custom-file-input"
+                           onchange="document.getElementById('profilePicture').src= window.URL.createObjectURL(this.files[0])" />
+                </div>
+            </div>
+            <div class="form-group" style="padding-bottom:6px">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="padding-bottom:6px">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}
